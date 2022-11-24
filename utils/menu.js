@@ -8,6 +8,9 @@ import {
     allGirlSudents,
     students20s,
     newRandomStudent,
+    youngestStudent,
+    avegareAge,
+    alphOrder,
 } from "./menu-utils.js";
 
 /**Función para desplegar el menú */
@@ -90,14 +93,23 @@ export async function menu(students) {
                 console.table(newRandomStudent(students));
                 break;
             case 11:
+                console.log(lineBreak + "ESTUDIANTE MÁS JOVEN");
+                console.table(youngestStudent(students));
                 break;
             case 12:
+                console.log(lineBreak + "EDAD MEDIA DE LOS ESTUDIANTES");
+                console.table(avegareAge(students));
                 break;
             case 13:
+                console.log(lineBreak + "EDAD MEDIA DE LAS CHICAS ESTUDIANTES");
+                let girls = girlStudents(students);
+                console.table(avegareAge(girls));
                 break;
             case 14:
                 break;
             case 15:
+                console.log(lineBreak + "ESTUDIANTES ORDENADOS ALFABÉTICAMENTE POR NOMBRE");
+                console.table(alphOrder(students));
                 break;
             case 16:
                 break;

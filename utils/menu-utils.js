@@ -47,7 +47,7 @@ export function girlStudents(students) {
 }
 
 //7- Mostrar por consola el número de chicos y chicas que hay en la clase.
-export function boyStudents(students) {
+function boyStudents(students) {
     let boyStudents = [];
     students.forEach((student) => {
         if (student.gender == "male") {
@@ -113,4 +113,44 @@ export function newRandomStudent(students) {
     });
 
     console.table(students);
+}
+
+//11- Mostrar por consola el nombre de la persona más joven de la clase.
+export function youngestStudent(students) {
+    let youngest = students[0];
+    students.forEach((student) => {
+        if (student.age < youngest.age) {
+            youngest = student;
+        }
+    });
+    return youngest;
+}
+
+//12- Mostrar por consola la edad media de todos los alumnos de la clase.
+export function avegareAge(students) {
+    let count = 0;
+    students.forEach((student) => {
+        count += student.age;
+    });
+    let average = Math.round(count / students.length, 0);
+    return average;
+}
+
+//14- Añadir nueva nota a los alumnos. Por cada alumno de la clase, tendremos
+//que calcular una nota de forma aleatoria(número entre 0 y 10) y añadirla a su
+//listado de notas.
+
+//15- Ordenar el array de alumnos alfabéticamente según su nombre.
+export function alphOrder(students) {
+    students.sort((a, b) => {
+        if (a.name == b.name) {
+            return 0;
+        }
+        if (a.name < b.name) {
+            return -1;
+        }
+        return 1;
+    });
+
+    return students;
 }
