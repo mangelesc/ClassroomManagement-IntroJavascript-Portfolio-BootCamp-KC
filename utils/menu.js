@@ -1,4 +1,14 @@
 import { getNumberFromConsole } from "./general-utils.js";
+import {
+    allNamesStudents,
+    deleteLastStudent,
+    deleteRandomStudent,
+    girlStudents,
+    countStudents,
+    allGirlSudents,
+    students20s,
+    newRandomStudent,
+} from "./menu-utils.js";
 
 /**Función para desplegar el menú */
 export async function menu(students) {
@@ -48,20 +58,36 @@ export async function menu(students) {
                 console.log(students.length);
                 break;
             case 3:
+                console.log(lineBreak + "NOMBRE DE ALUMNOS EN CLASE");
+                allNamesStudents(students);
                 break;
             case 4:
+                console.log(lineBreak + "ELIMINAR ÚLTIMO ALUMNO");
+                deleteLastStudent(students);
                 break;
             case 5:
+                console.log(lineBreak + "ELIMINAR ALUMNO ALEATORIO");
+                deleteRandomStudent(students);
                 break;
             case 6:
+                console.log(lineBreak + "ALUMNAS EN CLASE");
+                console.table(girlStudents(students));
                 break;
             case 7:
+                console.log(lineBreak + "CHICOS Y CHICAS EN CLASE");
+                countStudents(students);
                 break;
             case 8:
+                console.log(lineBreak + "¿TODOS LOS ALUMNOS NOS CHICAS?");
+                console.log(allGirlSudents(students));
                 break;
             case 9:
+                console.log(lineBreak + "ESTUDIANTES ENTRE 20 Y 25 AÑOS");
+                console.table(students20s(students));
                 break;
             case 10:
+                console.log(lineBreak + "ESTUDIANTES ENTRE 20 Y 25 AÑOS");
+                console.table(newRandomStudent(students));
                 break;
             case 11:
                 break;
