@@ -8,13 +8,13 @@ import { menu } from "./utils/menu.js";
 const students = [
     {
         age: 32,
-        examScores: [5, 6, 8],
+        examScores: [],
         gender: "male",
         name: "edu",
     },
     {
         age: 29,
-        examScores: [7, 8, 9],
+        examScores: [],
         gender: "female",
         name: "angeles",
     },

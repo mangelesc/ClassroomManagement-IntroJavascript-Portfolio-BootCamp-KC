@@ -177,42 +177,67 @@ export function alphOrder(students) {
 }
 
 //16- Mostrar por consola el alumno de la clase con las mejores notas.
-export function bestScoreStudent(students) {
-    let bestScoreStudent = students[0];
+function bestScoreStudent(students) {
+    let bestScoreStudent = "";
     let highestScore = 0;
 
     students.forEach((student) => {
-        student.examScores.forEach((mark) => {
-            //hacemos la media de las notas cada alumno
-            let sumAll = 0;
-            sumAll += mark;
+        //comprobamos que haya notas en el array
+        if (student.examScores > 0) {
+            //Si las hay comparamos
+            student.examScores.forEach((mark) => {
+                //hacemos la media de las notas cada alumno
+                let sumAll = 0;
+                sumAll += mark;
 
-            //camparamos si es mayor al anterior
-            if (sumAll > highestScore) {
-                //si lo es, asignamos el valor a las variables de control
-                highestScore = sumAll;
-                bestScoreStudent = student;
-            }
-        });
+                //camparamos si es mayor al anterior
+                if (sumAll > highestScore) {
+                    //si lo es, asignamos el valor a las variables de control
+                    highestScore = sumAll;
+                    bestScoreStudent = student;
+                }
+            });
+        }
     });
-
+    //Si ningun alumno tiene notas, devolvemos un string vacío
     return bestScoreStudent;
+}
+
+export function printBestScoreStudent(students) {
+    let bestStudent = bestScoreStudent(students);
+
+    //Comprobamos que no nos haya devuelto un string vacio (no habría notas registardas)
+    if (bestStudent != 0) {
+        console.table(bestStudent);
+
+        // Si no, mostramos un mensaje de aviso.
+    } else {
+        console.log("Ups, los alumnos aún no tienen notas registradas");
+    }
 }
 
 //17- Mostrar por consola la nota media más alta de la clase y el nombre del alumno al que pertenece.
 export function bestScore(students) {
-    let sumAll = 0;
     let bestStudent = bestScoreStudent(students);
 
-    bestStudent.examScores.forEach((mark) => {
-        sumAll += mark;
-    });
+    //Comprobamos que no nos haya devuelto un string vacio (no habría notas registardas)
+    if (bestStudent != 0) {
+        let sumAll = 0;
 
-    let averageScore = sumAll / bestStudent.examScores.length;
-    //limitamos a 2 el número de decimales
-    averageScore = averageScore.toFixed(2);
+        bestStudent.examScores.forEach((mark) => {
+            sumAll += mark;
+        });
 
-    console.log(bestStudent.name + " tiene la nota media más alta: " + averageScore + "!!");
+        let averageScore = sumAll / bestStudent.examScores.length;
+        //limitamos a 2 el número de decimales
+        averageScore = averageScore.toFixed(2);
+
+        console.log(bestStudent.name + " tiene la nota media más alta: " + averageScore + "!!");
+    }
+    // Si no, mostramos un mensaje de aviso.
+    else {
+        console.log("Ups, los alumnos aún no tienen notas registradas");
+    }
 }
 
 //18- Añadir un punto extra a cada nota existente de todos los alumnos.

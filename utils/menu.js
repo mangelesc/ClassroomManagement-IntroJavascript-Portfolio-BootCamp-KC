@@ -12,7 +12,7 @@ import {
     avegareAge,
     scoresRandom,
     alphOrder,
-    bestScoreStudent,
+    printBestScoreStudent,
     bestScore,
     increaseScores,
     setScore,
@@ -86,7 +86,7 @@ export async function menu(students) {
                 countStudents(students);
                 break;
             case 8:
-                console.log(lineBreak + "¿TODOS LOS ALUMNOS NOS CHICAS?");
+                console.log(lineBreak + "¿TODOS LOS ALUMNOS SON CHICAS?");
                 console.log(allGirlSudents(students));
                 break;
             case 9:
@@ -120,8 +120,7 @@ export async function menu(students) {
                 break;
             case 16:
                 console.log(lineBreak + "ALUMNO CON LAS MEJORES NOTAS");
-                let bestStudent = bestScoreStudent(students);
-                console.table(bestStudent);
+                printBestScoreStudent(students);
                 break;
             case 17:
                 console.log(lineBreak + "NOTA MEDA MÁS ALTA DE LA CLASE");
