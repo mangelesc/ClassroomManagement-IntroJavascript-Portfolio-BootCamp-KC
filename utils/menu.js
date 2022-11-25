@@ -10,7 +10,12 @@ import {
     newRandomStudent,
     youngestStudent,
     avegareAge,
+    scoresRandom,
     alphOrder,
+    bestScoreStudent,
+    bestScore,
+    increaseScores,
+    setScore,
 } from "./menu-utils.js";
 
 /**Función para desplegar el menú */
@@ -30,7 +35,7 @@ export async function menu(students) {
         console.log("8- Mostrar true o false por consola si todos los alumnos de la clase son chicas.");
         console.log("9- Mostrar por consola los nombres de los alumnos que tengan entre 20 y 25 años.");
         console.log(
-            "10- Añadir un alumno nuevo con los siguientes datos: \n -Nombre aleatorio.\n -Edad aleatoria entre 20 y 50 años.\n -Género aleatorio.\n -Listado de calificaciones vacío."
+            "10- Añadir un alumno nuevo con los siguientes datos: \n    -Nombre aleatorio.\n    -Edad aleatoria entre 20 y 50 años.\n    -Género aleatorio.\n    -Listado de calificaciones vacío."
         );
         console.log("11- Mostrar por consola el nombre de la persona más joven de la clase.");
         console.log("12- Mostrar por consola la edad media de todos los alumnos de la clase.");
@@ -47,7 +52,7 @@ export async function menu(students) {
         try {
             option = await getNumberFromConsole(0, 19);
         } catch (error) {
-            console.log("\n\nUps, valor incorrecto\n");
+            console.log("\n\nUps, has introducido un valor incorrecto\n");
             option = 0;
         }
 
@@ -86,15 +91,16 @@ export async function menu(students) {
                 break;
             case 9:
                 console.log(lineBreak + "ESTUDIANTES ENTRE 20 Y 25 AÑOS");
-                console.table(students20s(students));
+                students20s(students);
                 break;
             case 10:
                 console.log(lineBreak + "ESTUDIANTES ENTRE 20 Y 25 AÑOS");
-                console.table(newRandomStudent(students));
+                newRandomStudent(students);
                 break;
             case 11:
                 console.log(lineBreak + "ESTUDIANTE MÁS JOVEN");
-                console.table(youngestStudent(students));
+                let student = youngestStudent(students);
+                console.log(student.name);
                 break;
             case 12:
                 console.log(lineBreak + "EDAD MEDIA DE LOS ESTUDIANTES");
@@ -106,18 +112,28 @@ export async function menu(students) {
                 console.table(avegareAge(girls));
                 break;
             case 14:
+                scoresRandom(students);
                 break;
             case 15:
                 console.log(lineBreak + "ESTUDIANTES ORDENADOS ALFABÉTICAMENTE POR NOMBRE");
                 console.table(alphOrder(students));
                 break;
             case 16:
+                console.log(lineBreak + "ALUMNO CON LAS MEJORES NOTAS");
+                let bestStudent = bestScoreStudent(students);
+                console.table(bestStudent);
                 break;
             case 17:
+                console.log(lineBreak + "NOTA MEDA MÁS ALTA DE LA CLASE");
+                bestScore(students);
                 break;
             case 18:
+                console.log(lineBreak + "AÑADIR PUNTO EXTRA A CADA NOTA EXISTENTE");
+                increaseScores(students, 1.0);
                 break;
             case 19:
+                console.log(lineBreak + "ESTABLECER NOTA (10) SI NO HAY NINGUNA REGISTARA");
+                setScore(students, 10);
                 break;
             case 0:
                 console.log("\nSee you later, Alligator \nAPP FINALIZADA\n\n");

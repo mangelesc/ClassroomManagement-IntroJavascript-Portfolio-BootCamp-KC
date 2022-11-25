@@ -1,38 +1,40 @@
-import readline from "readline";
-
-//
 function randomValueArray(arrayList) {
     const maxValue = arrayList.length;
+
     return Math.floor(Math.random() * maxValue);
 }
 
 //3- Mostrar por consola todos los nombres de los alumnos.
 export function allNamesStudents(students) {
     students.forEach((student) => {
-        console.log("  - " + student.name);
+        console.log(student.name);
     });
 }
 
 //4- Eliminar el último alumno de la clase.
 export function deleteLastStudent(students) {
     console.table(students);
+
     if (students.length > 0) {
         students.pop();
         console.log("Último alumno eliminado/a");
-        console.table(students);
     }
+
+    console.table(students);
 }
 
 //5- Eliminar un alumno aleatoriamente de la clase.
 export function deleteRandomStudent(students) {
     console.table(students);
+
     if (students.length > 0) {
         const randomValue = randomValueArray(students);
         let randomStudent = students[randomValue];
         console.log(randomStudent.name + " ha sido eliminado/a");
         students.splice(randomValue, 1);
-        console.table(students);
     }
+
+    console.table(students);
 }
 
 //6- Mostrar por consola todos los datos de los alumnos que son chicas.
@@ -43,6 +45,7 @@ export function girlStudents(students) {
             girlStudents.push(student);
         }
     });
+
     return girlStudents;
 }
 
@@ -54,6 +57,7 @@ function boyStudents(students) {
             boyStudents.push(student);
         }
     });
+
     return boyStudents;
 }
 
@@ -78,7 +82,10 @@ export function students20s(students) {
             tweentiesStudents.push(student);
         }
     });
-    return tweentiesStudents;
+
+    tweentiesStudents.forEach((student) => {
+        console.log(student.name);
+    });
 }
 
 //10- Añadir un alumno nuevo con los siguientes datos:
@@ -118,39 +125,119 @@ export function newRandomStudent(students) {
 //11- Mostrar por consola el nombre de la persona más joven de la clase.
 export function youngestStudent(students) {
     let youngest = students[0];
+
     students.forEach((student) => {
         if (student.age < youngest.age) {
             youngest = student;
         }
     });
+
     return youngest;
 }
 
 //12- Mostrar por consola la edad media de todos los alumnos de la clase.
 export function avegareAge(students) {
     let count = 0;
+
     students.forEach((student) => {
         count += student.age;
     });
-    let average = Math.round(count / students.length, 0);
+
+    let average = Math.round(count / students.length);
+
     return average;
 }
 
 //14- Añadir nueva nota a los alumnos. Por cada alumno de la clase, tendremos
 //que calcular una nota de forma aleatoria(número entre 0 y 10) y añadirla a su
 //listado de notas.
+export function scoresRandom(students) {
+    students.forEach((student) => {
+        let randomScore = Math.floor(Math.random() * 10);
+
+        student.examScores.push(randomScore);
+    });
+
+    console.table(students);
+}
 
 //15- Ordenar el array de alumnos alfabéticamente según su nombre.
 export function alphOrder(students) {
     students.sort((a, b) => {
-        if (a.name == b.name) {
+        if (a.name.toLowerCase() == b.name.toLowerCase()) {
             return 0;
         }
-        if (a.name < b.name) {
+        if (a.name.toLowerCase() < b.name.toLowerCase()) {
             return -1;
         }
         return 1;
     });
 
     return students;
+}
+
+//16- Mostrar por consola el alumno de la clase con las mejores notas.
+export function bestScoreStudent(students) {
+    let bestScoreStudent = students[0];
+    let highestScore = 0;
+
+    students.forEach((student) => {
+        student.examScores.forEach((mark) => {
+            //hacemos la media de las notas cada alumno
+            let sumAll = 0;
+            sumAll += mark;
+
+            //camparamos si es mayor al anterior
+            if (sumAll > highestScore) {
+                //si lo es, asignamos el valor a las variables de control
+                highestScore = sumAll;
+                bestScoreStudent = student;
+            }
+        });
+    });
+
+    return bestScoreStudent;
+}
+
+//17- Mostrar por consola la nota media más alta de la clase y el nombre del alumno al que pertenece.
+export function bestScore(students) {
+    let sumAll = 0;
+    let bestStudent = bestScoreStudent(students);
+
+    bestStudent.examScores.forEach((mark) => {
+        sumAll += mark;
+    });
+
+    let averageScore = sumAll / bestStudent.examScores.length;
+    //limitamos a 2 el número de decimales
+    averageScore = averageScore.toFixed(2);
+
+    console.log(bestStudent.name + " tiene la nota media más alta: " + averageScore + "!!");
+}
+
+//18- Añadir un punto extra a cada nota existente de todos los alumnos.
+//Recordad que la nota máxima posible es 10
+export function increaseScores(students, add) {
+    const MAXSCORE = 10.0;
+
+    students.forEach((student) => {
+        for (let i = 0; i < student.examScores.length; i++) {
+            if (student.examScores[i] + add <= MAXSCORE) {
+                student.examScores[i] += add;
+            }
+        }
+    });
+
+    console.table(students);
+}
+
+//19- Si los alumnos aún no tienen registrada ninguna nota, les pondremos un 10.
+export function setScore(students, set) {
+    students.forEach((student) => {
+        if (student.examScores.length === 0) {
+            student.examScores[0] = set;
+        }
+    });
+
+    console.table(students);
 }
